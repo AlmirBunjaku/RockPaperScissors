@@ -1,0 +1,1 @@
+Console-based game of Rock Paper Scissors. First JS project of The Odin Project curriculum.

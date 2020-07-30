@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>Open the console to play the game</h1>
+
+    <script>
+        
+        let scorePlayer=0;
+        let scoreComputer=0;
+
+        function computerPlay(){
+            let random=Math.floor(Math.random()*(3));
+            let computerChoices=['Rock','Paper','Scissors'];
+            return selection=computerChoices[random];
+        }
+        
+        function playRound(playerSelection, computerSelection){
+            if(playerSelection==computerSelection){
+                return 'Draw! You both picked '+playerSelection.toLowerCase()+'.';
+            }else if(playerSelection=='Rock' && computerSelection=='Scissors'){
+                scorePlayer++;
+                return 'You win! Rock beats scissors.';
+            }else if(playerSelection=='Rock' && computerSelection=='Paper'){
+                scoreComputer++;
+                return 'You lose! Paper beats rock.';
+            }else if(playerSelection=='Paper' && computerSelection=='Rock'){
+                scorePlayer++;
+                return 'You win! Paper beats rock.';
+            }else if(playerSelection=='Paper' && computerSelection=='Scissors'){
+                scoreComputer++;
+                return 'You lose! Scissors beat paper.';
+            }else if(playerSelection=='Scissors' && computerSelection=='Paper'){
+                scorePlayer++;
+                return 'You win! Scissors beat paper.';
+            }else if(playerSelection=='Scissors' && computerSelection=='Rock'){
+                scoreComputer++;
+                return 'You lose! Rock beats scissors.';
+            }
+        }
+
+        function game(){
+            let numberOfRounds;
+            while(isNaN(numberOfRounds)){
+                numberOfRounds=prompt('How many rounds?');
+            }
+            
+            for(let i=0;i<numberOfRounds;i++){
+                let playerSelection;
+                
+                while(playerSelection!='Rock' && playerSelection!='Paper' && playerSelection!='Scissors'){
+                    playerSelection=prompt('Your choice (Rock | Paper | Scissors): ');
+                    playerSelection=playerSelection.toLowerCase();
+                    playerSelection=playerSelection[0].toUpperCase()+playerSelection.slice(1);
+                }
+
+                const computerSelection=computerPlay();
+                console.log('PLAYER: ' + playerSelection);
+                console.log('COMPUTER: ' + computerSelection);
+                console.log(playRound(playerSelection, computerSelection));
+                console.log('Current score: ' + scorePlayer + ' - ' + scoreComputer);
+            }
+
+            console.log('Final score: ' + scorePlayer + ' - ' + scoreComputer);
+            if(scorePlayer>scoreComputer){
+                console.log('You won ' + scorePlayer + ' - ' + scoreComputer + ' after ' + numberOfRounds + ' rounds. Congratulations!');
+                console.log('Refresh (F5) to play again!');
+            }else if(scorePlayer<scoreComputer){
+                console.log('You lost ' + scorePlayer + ' - ' + scoreComputer + ' after ' + numberOfRounds + ' rounds. Better luck next time!');
+                console.log('Refresh (F5) to play again!');
+            }else{
+                console.log('You drew ' + scorePlayer + ' - ' + scoreComputer + ' after ' + numberOfRounds + ' rounds.');
+                console.log('Refresh (F5) to play again!');
+            }
+        }
+
+        game();
+
+    </script>
+</body>
+</html>
